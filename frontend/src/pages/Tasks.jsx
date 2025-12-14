@@ -108,13 +108,10 @@ const Tasks = () => {
         </button>
 
         <AnimatePresence>
-          <div
-            className="mt-4 max-h-105 overflow-y-auto pr-2 space-y-3
-                  scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent"
-          >
+          <div className="mt-4 max-h-105 overflow-y-auto pr-2 space-y-3 scrollbar-hide">
             {tasks.length === 0 ? (
               <p className="text-gray-400 text-center mt-10">
-                No tasks yet. Add your first task 🚀
+                No tasks yet. Add your first task!
               </p>
             ) : (
               tasks.map((task) => (

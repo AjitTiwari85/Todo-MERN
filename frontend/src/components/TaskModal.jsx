@@ -20,7 +20,7 @@ function TaskModal({
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.8, opacity: 0 }}
-        className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-6 w-[350px]"
+        className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-6 w-87.5"
       >
         <h2 className="text-xl font-bold text-white mb-4">
           {isEdit ? "Edit Task" : "Create Task"}

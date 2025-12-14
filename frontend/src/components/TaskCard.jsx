@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { FiEdit, FiTrash2 } from "react-icons/fi";
 
 const formatDate = (date) => {
   return new Date(date).toLocaleDateString("en-IN", {
@@ -59,19 +60,21 @@ function TaskCard({ task, onDelete, onEdit, onToggle }) {
         </div>
       </div>
 
-      <div className="flex gap-3">
+      <div className="flex gap-2">
         <button
           onClick={() => onEdit(task)}
-          className="text-yellow-400 hover:scale-110 transition"
+          className="w-8 h-8 flex items-center justify-center bg-white/10 backdrop-blur-md border border-white/20 rounded-lg text-yellow-400 hover:bg-yellow-400/20 hover:scale-105 transition"
+          title="Edit Task"
         >
-          ✏️
+          <FiEdit size={16} />
         </button>
 
         <button
           onClick={() => onDelete(task._id)}
-          className="text-red-400 hover:scale-110 transition"
+          className="w-8 h-8 flex items-center justify-center bg-white/10 backdrop-blur-md border border-white/20 rounded-lg text-red-400 hover:bg-red-400/20 hover:scale-105 transition"
+          title="Delete Task"
         >
-          🗑️
+          <FiTrash2 size={16} />
         </button>
       </div>
     </motion.div>
@@ -79,3 +82,4 @@ function TaskCard({ task, onDelete, onEdit, onToggle }) {
 }
 
 export default TaskCard;
+
