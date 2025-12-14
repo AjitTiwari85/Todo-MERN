@@ -8,22 +8,37 @@ const Auth = () => {
   const [form, setForm] = useState({ name: "", email: "", password: "" });
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    try {
-      if (isLogin) {
-        const res = await api.post("/auth/login", form);
-        localStorage.setItem("token", res.data.token);
-        navigate("/tasks");
-      } else {
-        await api.post("/auth/register", form);
-        setIsLogin(true);
+  try {
+    if (isLogin) {
+      const res = await api.post("/auth/login", {
+        email: form.email,
+        password: form.password
+      });
+
+      localStorage.setItem("token", res.data.token);
+      navigate("/tasks");
+    } else {
+      if (!form.name || !form.email || !form.password) {
+        return alert("All fields required");
       }
-    } catch (err) {
-      alert(err.response?.data?.message || "Error");
+
+      await api.post("/auth/register", {
+        name: form.name,
+        email: form.email,
+        password: form.password
+      });
+
+      alert("Registered successfully. Please login.");
+      setIsLogin(true);
     }
-  };
+  } catch (err) {
+    alert(err.response?.data?.message || "Signup failed");
+  }
+};
+
 
   return (
     <div className="h-screen flex items-center justify-center bg-gray-100">
