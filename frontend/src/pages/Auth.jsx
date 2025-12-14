@@ -44,7 +44,8 @@ const Auth = () => {
           password: form.password,
         });
         localStorage.setItem("token", res.data.token);
-        navigate("/tasks");
+        // Use replace to prevent back to login
+        navigate("/tasks", { replace: true });
       } else {
         await api.post("/auth/register", form);
         setIsLogin(true);
@@ -66,7 +67,7 @@ const Auth = () => {
         initial="hidden"
         animate="visible"
         exit="exit"
-        className="relative z-10 w-[350px] bg-white/10 backdrop-blur-xl rounded-2xl p-6 shadow-2xl border border-white/20"
+        className="relative z-10 w-87.5 bg-white/10 backdrop-blur-xl rounded-2xl p-6 shadow-2xl border border-white/20"
       >
         <AnimatePresence mode="wait" custom={isLogin ? "login" : "signup"}>
           <motion.div

@@ -30,7 +30,7 @@ const Tasks = () => {
       if (editingTask) {
         await api.put(`/tasks/${editingTask._id}`, {
           title,
-          description
+          description,
         });
       } else {
         await api.post("/tasks", { title, description });
@@ -63,16 +63,14 @@ const Tasks = () => {
   };
 
   const toggleStatus = async (task) => {
-  const newStatus =
-    task.status === "pending" ? "completed" : "pending";
+    const newStatus = task.status === "pending" ? "completed" : "pending";
 
-  await api.put(`/tasks/${task._id}`, {
-    status: newStatus
-  });
+    await api.put(`/tasks/${task._id}`, {
+      status: newStatus,
+    });
 
-  fetchTasks();
-};
-
+    fetchTasks();
+  };
 
   const closeModal = () => {
     setShowModal(false);
@@ -83,7 +81,7 @@ const Tasks = () => {
 
   const logout = () => {
     localStorage.removeItem("token");
-    navigate("/");
+    navigate("/", { replace: true }); // prevent back to tasks
   };
 
   useEffect(() => {
@@ -91,7 +89,7 @@ const Tasks = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black p-6">
+    <div className="min-h-screen bg-linear-to-br from-gray-900 via-gray-800 to-black p-6">
       {/* Header */}
       <div className="max-w-2xl mx-auto flex justify-between mb-6">
         <h1 className="text-white text-2xl font-bold">My Tasks</h1>
@@ -110,16 +108,25 @@ const Tasks = () => {
         </button>
 
         <AnimatePresence>
-          <div className="space-y-3">
-            {tasks.map((task) => (
-              <TaskCard
-                key={task._id}
-                task={task}
-                onDelete={deleteTask}
-                onEdit={openEdit}
-                 onToggle={toggleStatus}
-              />
-            ))}
+          <div
+            className="mt-4 max-h-105 overflow-y-auto pr-2 space-y-3
+                  scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent"
+          >
+            {tasks.length === 0 ? (
+              <p className="text-gray-400 text-center mt-10">
+                No tasks yet. Add your first task 🚀
+              </p>
+            ) : (
+              tasks.map((task) => (
+                <TaskCard
+                  key={task._id}
+                  task={task}
+                  onDelete={deleteTask}
+                  onEdit={openEdit}
+                  onToggle={toggleStatus}
+                />
+              ))
+            )}
           </div>
         </AnimatePresence>
       </motion.div>
