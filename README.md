@@ -110,82 +110,67 @@ Ensure you have the project files in a directory, e.g., `Serviots-Todo-App`.
 3. Once logged in, you can create new tasks, view your tasks, edit them, or delete them.
 4. Tasks are stored in the database and associated with your user account.
 
-## API Endpoints
+## API Documentation
 
-The backend provides the following API endpoints:
+### Authentication APIs
 
-### Authentication
+#### 1. Register User
 
-- `POST /auth/register` - Register a new user
-- `POST /auth/login` - Login and receive a JWT token
+**POST** `/auth/register`
 
-### Tasks (Protected - requires authentication)
+**Body:**
 
-- `GET /tasks` - Get all tasks for the logged-in user
-- `POST /tasks` - Create a new task
-- `PUT /tasks/:id` - Update a specific task
-- `DELETE /tasks/:id` - Delete a specific task
-
-### API DOCUMENTATION
-
-//Authentication APIs
-1️# Register User
-
-POST /auth/register
-
-Body
-
+```json
 {
   "name": "Ajit",
   "email": "ajit@example.com",
   "password": "password123"
 }
+```
 
+**Success (201):**
 
-Success (201)
-
+```json
 {
   "message": "User registered successfully"
 }
+```
 
+#### 2. Login User
 
+**POST** `/auth/login`
 
+**Body:**
 
-2️# Login User
-
-POST /auth/login
-
-Body
-
+```json
 {
   "email": "ajit@example.com",
   "password": "password123"
 }
+```
 
+**Success (200):**
 
-Success (200)
-
+```json
 {
   "token": "jwt_token_here"
 }
+```
 
+**Note:** Token must be sent in headers for protected routes.
 
+### Task APIs (Protected)
 
+**Authorization Header:**  
+`Authorization: Bearer <JWT_TOKEN>`
 
-//Token must be sent in headers for protected routes.
+#### 3. Get All Tasks
 
-//Task APIs (Protected)
-Authorization Header
-Authorization: Bearer <JWT_TOKEN>
+**GET** `/tasks`
 
+**Success (200):**
 
-
-3️# Get All Tasks
-
-GET /tasks
-
-Success (200)
-
+```json
 [
   {
     "_id": "65f1...",
@@ -193,56 +178,59 @@ Success (200)
     "completed": false
   }
 ]
+```
 
+#### 4. Create Task
 
+**POST** `/tasks`
 
+**Body:**
 
-4️# Create Task
-
-POST /tasks
-
-Body
-
+```json
 {
   "title": "Learn MERN",
   "description": "Build Todo App"
 }
+```
 
+**Success (201):**
 
-Success (201)
-
+```json
 {
   "message": "Task created successfully"
 }
+```
 
+#### 5. Update Task
 
+**PUT** `/tasks/:taskId`
 
-5️# Update Task
+**Body:**
 
-PUT /tasks/:taskId
-
-Body
-
+```json
 {
   "title": "Updated Task",
   "completed": true
 }
+```
 
+**Success (200):**
 
-Success (200)
-
+```json
 {
   "message": "Task updated successfully"
 }
+```
 
+#### 6. Delete Task
 
+**DELETE** `/tasks/:taskId`
 
-6# Delete Task
+**Success (200):**
 
-DELETE /tasks/:taskId
-
-Success (200)
-
+```json
 {
   "message": "Task deleted successfully"
 }
+```
+
