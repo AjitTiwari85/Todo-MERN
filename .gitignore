@@ -1,4 +1,12 @@
+# -------- COMMON --------
 node_modules/
 .env
+.env.*
+
+# -------- BUILD --------
 dist/
 build/
+
+# -------- OS --------
+.DS_Store
+Thumbs.db

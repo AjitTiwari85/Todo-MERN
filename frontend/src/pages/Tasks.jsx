@@ -104,7 +104,7 @@ const Tasks = () => {
           onClick={openCreate}
           className="mb-4 bg-white text-black px-4 py-2 rounded hover:scale-105 transition"
         >
-          + Create Task
+          + Add Task
         </button>
 
         <AnimatePresence>
