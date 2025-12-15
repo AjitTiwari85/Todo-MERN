@@ -128,8 +128,9 @@ The backend provides the following API endpoints:
 - `DELETE /tasks/:id` - Delete a specific task
 
 ### API DOCUMENTATION
+
 //Authentication APIs
-1️ Register User
+1️# Register User
 
 POST /auth/register
 
@@ -148,7 +149,10 @@ Success (201)
   "message": "User registered successfully"
 }
 
-2️ Login User
+
+
+
+2️# Login User
 
 POST /auth/login
 
@@ -167,13 +171,17 @@ Success (200)
 }
 
 
+
+
 //Token must be sent in headers for protected routes.
 
 //Task APIs (Protected)
 Authorization Header
 Authorization: Bearer <JWT_TOKEN>
 
-3️ Get All Tasks
+
+
+3️# Get All Tasks
 
 GET /tasks
 
@@ -187,7 +195,10 @@ Success (200)
   }
 ]
 
-4️ Create Task
+
+
+
+4️# Create Task
 
 POST /tasks
 
@@ -205,7 +216,9 @@ Success (201)
   "message": "Task created successfully"
 }
 
-5️ Update Task
+
+
+5️# Update Task
 
 PUT /tasks/:taskId
 
@@ -223,7 +236,9 @@ Success (200)
   "message": "Task updated successfully"
 }
 
-6 Delete Task
+
+
+6# Delete Task
 
 DELETE /tasks/:taskId
 
