@@ -126,46 +126,123 @@ The backend provides the following API endpoints:
 - `PUT /tasks/:id` - Update a specific task
 - `DELETE /tasks/:id` - Delete a specific task
 
-## Project Structure
+### API DOCUMENTATION
 
-```
-Serviots-Todo-App/
-├── backend/
-│   ├── package.json
-│   ├── server.js
-│   ├── .env
-│   └── src/
-│       ├── app.js
-│       ├── config/
-│       │   └── db.js
-│       ├── controllers/
-│       │   ├── authController.js
-│       │   └── taskController.js
-│       ├── middleware/
-│       │   └── authMiddleware.js
-│       ├── models/
-│       │   ├── Task.js
-│       │   └── User.js
-│       └── routes/
-│           ├── authRoutes.js
-│           └── taskRoutes.js
-└── frontend/
-    ├── package.json
-    ├── vite.config.js
-    ├── index.html
-    └── src/
-        ├── App.jsx
-        ├── main.jsx
-        ├── components/
-        │   ├── Loader.jsx
-        │   ├── ProtectedRoute.jsx
-        │   ├── TaskCard.jsx
-        │   └── TaskModal.jsx
-        ├── pages/
-        │   ├── Auth.jsx
-        │   └── Tasks.jsx
-        └── services/
-            └── api.js
-```
+//Authentication APIs
+1️# Register User
+
+POST /auth/register
+
+Body
+
+{
+  "name": "Ajit",
+  "email": "ajit@example.com",
+  "password": "password123"
+}
 
 
+Success (201)
+
+{
+  "message": "User registered successfully"
+}
+
+
+
+
+2️# Login User
+
+POST /auth/login
+
+Body
+
+{
+  "email": "ajit@example.com",
+  "password": "password123"
+}
+
+
+Success (200)
+
+{
+  "token": "jwt_token_here"
+}
+
+
+
+
+//Token must be sent in headers for protected routes.
+
+//Task APIs (Protected)
+Authorization Header
+Authorization: Bearer <JWT_TOKEN>
+
+
+
+3️# Get All Tasks
+
+GET /tasks
+
+Success (200)
+
+[
+  {
+    "_id": "65f1...",
+    "title": "Learn MERN",
+    "completed": false
+  }
+]
+
+
+
+
+4️# Create Task
+
+POST /tasks
+
+Body
+
+{
+  "title": "Learn MERN",
+  "description": "Build Todo App"
+}
+
+
+Success (201)
+
+{
+  "message": "Task created successfully"
+}
+
+
+
+5️# Update Task
+
+PUT /tasks/:taskId
+
+Body
+
+{
+  "title": "Updated Task",
+  "completed": true
+}
+
+
+Success (200)
+
+{
+  "message": "Task updated successfully"
+}
+
+
+
+6# Delete Task
+
+DELETE /tasks/:taskId
+
+Success (200)
+
+{
+  "message": "Task deleted successfully"
+}
